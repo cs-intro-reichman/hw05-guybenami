@@ -80,7 +80,7 @@ public class GameOfLife {
 	// Creates a new board from the given board, using the rules of the game.
 	// Uses the cellValue(board,i,j) function to compute the value of each 
 	// cell in the new board. Returns the new board.
-	private static int[][] evolve(int[][] board) {
+	public static int[][] evolve(int[][] board) {
 		int[][] newBoard = new int[board.length][board[0].length];
 		for(int i=1 ; i<newBoard.length-1 ; i++)
 			for(int j=1 ; j<newBoard[0].length-1 ; j++)
@@ -97,7 +97,7 @@ public class GameOfLife {
 	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	// Uses the count(board,i,j) function to count the number of alive neighbors.
-	private static int cellValue(int[][] board, int i, int j) {
+	public static int cellValue(int[][] board, int i, int j) {
 		int liveNeighbors = count(board, i, j);
 		if(board[i][j] == 1 && (liveNeighbors < 2 || liveNeighbors > 3))
 			return 0;
@@ -111,7 +111,7 @@ public class GameOfLife {
 	// (The cell itself is not counted).
 	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
-	private static int count(int[][] board, int i, int j) {
+	public static int count(int[][] board, int i, int j) {
 		int count = 0;
 		if(board[i-1][j] == 1)
 			count++;
@@ -133,7 +133,7 @@ public class GameOfLife {
 	}
 	
 	// Prints the board. Alive and dead cells are printed as 1 and 0, respectively.
-    private static void print(int[][] arr) {
+    public static void print(int[][] arr) {
 		for(int i=1 ; i<arr.length-1 ; i++) {
 			for(int j=1 ; j<arr[0].length-1 ; j++)
 				System.out.printf("%d ", arr[i][j]);
