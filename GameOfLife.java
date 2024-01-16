@@ -81,7 +81,9 @@ public class GameOfLife {
 	// Uses the cellValue(board,i,j) function to compute the value of each 
 	// cell in the new board. Returns the new board.
 	public static int[][] evolve(int[][] board) {
+		//declaring a 2d array that will represent the new board values of each cell
 		int[][] newBoard = new int[board.length][board[0].length];
+		//calculating the new board status using the cellValue() function
 		for(int i=1 ; i<newBoard.length-1 ; i++)
 			for(int j=1 ; j<newBoard[0].length-1 ; j++)
 				newBoard[i][j] = cellValue(board, i, j);
@@ -98,7 +100,9 @@ public class GameOfLife {
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	// Uses the count(board,i,j) function to count the number of alive neighbors.
 	public static int cellValue(int[][] board, int i, int j) {
+		//compute how many live neighbors cell[i][j] has using the count() function
 		int liveNeighbors = count(board, i, j);
+		//return the value cell[i][j] should have in the next generation
 		if(board[i][j] == 1 && (liveNeighbors < 2 || liveNeighbors > 3))
 			return 0;
 		else if(liveNeighbors == 3)
@@ -112,23 +116,17 @@ public class GameOfLife {
 	// Assumes that i is at least 1 and at most the number of rows in the board - 1. 
 	// Assumes that j is at least 1 and at most the number of columns in the board - 1. 
 	public static int count(int[][] board, int i, int j) {
+		//setting a counter for live neighbors of cell[i][j]
 		int count = 0;
-		if(board[i-1][j] == 1)
-			count++;
-		if(board[i-1][j+1] == 1)
-			count++;
-		if(board[i][j+1] == 1)
-			count++;
-		if(board[i+1][j+1] == 1)
-			count++;
-		if(board[i+1][j] == 1)
-			count++;
-		if(board[i+1][j-1] == 1)
-			count++;
-		if(board[i][j-1] == 1)
-			count++;
-		if(board[i-1][j-1] == 1)
-			count++;
+		//checking the status live/dead of each of the 8 neighbors of cell[i][j]
+		for(int k=0; k<3 ; k++) {
+			if(board[i-1+k][j-1] == 1)
+				count++;
+			if(board[i-1+k][j] == 1 && k != 1)
+				count++;
+			if(board[i-1+k][j+1] == 1)
+				count++;
+		}
 		return count;
 	}
 	
